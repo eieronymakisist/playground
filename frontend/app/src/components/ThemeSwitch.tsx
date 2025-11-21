@@ -10,11 +10,15 @@ const ThemeSwitch: React.FC = () => {
 
     return (
         <label className="themeSwitch">
-            <input className="cb" onChange={()=> dispatch(toggleTheme())} type="checkbox" />
-                <span className="toggle">
-                    <span className="right"><i className="bi bi-moon-stars-fill"></i></span>
-                    <span className="left"><i className="text-warning bi bi-sun-fill"></i></span>
+            <input checked={mode === "dark"} className="cb" onChange={() => dispatch(toggleTheme())} type="checkbox" />
+            <span className="toggle">
+                <span className="right">
+                    <i className="bi bi-moon-stars-fill"></i>
                 </span>
+                <span className="left">
+                    <i className="text-warning bi bi-sun-fill"></i>
+                </span>
+            </span>
         </label>
     )
 }

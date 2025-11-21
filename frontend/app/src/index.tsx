@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { BrowserRouter } from "react-router-dom";
 import AppNav from './components/AppNav';
+import Footer from './components/Footer';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,6 +19,7 @@ root.render(
       <BrowserRouter>
         <AppNav />
         <App />
+        <Footer/>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>
