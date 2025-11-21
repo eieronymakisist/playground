@@ -1,0 +1,73 @@
+services:
+  backend:
+    build: ./backend
+    container_name: fastapi
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/app:/app
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: appdb
+      POSTGRES_HOST: db
+    depends_on:
+      - postgres
+    networks:
+      net0:
+        ipv4_address: 172.25.0.5
+
+  frontend:
+    build: ./frontend
+    container_name: react
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend/app:/app
+    networks:
+      net0:
+        ipv4_address: 172.25.0.6
+
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: appdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      net0:
+        ipv4_address: 172.25.0.7
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL:  user@domain.com
+      PGADMIN_DEFAULT_PASSWORD:  pass
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      net0:
+        ipv4_address: 172.25.0.8
+      
+volumes:
+  pgdata:
+  pgadmin_data:
+
+networks:
+  net0:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+
