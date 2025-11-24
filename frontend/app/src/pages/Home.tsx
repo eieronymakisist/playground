@@ -9,6 +9,9 @@ const Home: React.FC = () => {
                 <Link to="/bikeshop" className='fs-3 fw-bold btn btn-warning btn-lg border border-3'>
                     Bike Shop
                 </Link>
+                <Link to="/userList" className='fs-3 fw-bold btn btn-success btn-lg border border-3'>
+                    User Table
+                </Link>
             </div>
         </div>
     );

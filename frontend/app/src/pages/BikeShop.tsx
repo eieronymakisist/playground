@@ -1,4 +1,3 @@
-import { url } from "inspector";
 import AtroposBanner from "../components/AtroposBanner";
 
 export default function BikeShop() {
